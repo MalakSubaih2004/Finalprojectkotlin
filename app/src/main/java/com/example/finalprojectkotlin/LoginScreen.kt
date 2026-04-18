@@ -86,7 +86,7 @@ fun LoginScreen(navController: NavController) {
                 OutlinedTextField(
                     value = phoneNumber,
                     onValueChange = { input ->
-                        if (input.length <= 10 && input.all { it.isDigit() }) {
+                        if (input.length <= 9 && input.all { it.isDigit() }) {
                             phoneNumber = input
                         }
                     },
@@ -129,14 +129,12 @@ fun LoginScreen(navController: NavController) {
                     onClick = {
                         when {
                             phoneNumber.isEmpty() -> {
-                                scope.launch {
-                                    snackBarHostState.showSnackbar("please enter phone number")
-                                }
+                                scope.launch { snackBarHostState.showSnackbar("please enter phone number") }
                             }
 
-                            phoneNumber.length < 9 -> {
+                            phoneNumber.length != 9 -> {
                                 scope.launch {
-                                    snackBarHostState.showSnackbar("The number must consist of 10 digits")
+                                    snackBarHostState.showSnackbar("The number must consist of 9 digits")
                                 }
                             }
 
